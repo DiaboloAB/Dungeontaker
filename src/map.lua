@@ -49,7 +49,7 @@ function map_load()
     map_list = {}
 
     table.insert( map_list, double(require('luamap.map_1') .layers[2].data))
-    table.insert( map_list, double(require('luamap.map_1') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_2') .layers[2].data))
     table.insert( map_list, double(require('luamap.map_3') .layers[2].data))
     table.insert( map_list, double(require('luamap.map_4') .layers[2].data))
     table.insert( map_list, double(require('luamap.map_5') .layers[2].data))
