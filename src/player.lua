@@ -1,56 +1,70 @@
 function player_load()
-    pose = {
+
+    life = 3
+
+    player_pose = {
         {15, 10},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
+        {14, 7}
     }
 
+    sprites_pose = {
+        {14, 7}
+    }
+
+    sprites = {}
+
     player = newAnimation(love.graphics.newImage("sprites/player.png"), 8, 8, 6)
+    fire = newAnimation(love.graphics.newImage("sprites/fire.png"), 8, 8, 6)
+
+    table.insert(sprites, player)
+    table.insert(sprites, fire)
 end
 
 function player_update()
-    player.currentTime = player.currentTime + dt
-    if player.currentTime >= player.duration then
-        player.currentTime = player.currentTime - player.duration
+    for i = 1, #sprites do
+        sprites[i].currentTime = sprites[i].currentTime + dt
+        if sprites[i].currentTime >= sprites[i].duration then
+            sprites[i].currentTime = sprites[i].currentTime - sprites[i].duration
+        end
     end
 end
 
 function player_draw()
-    local spriteNum = math.floor(player.currentTime / player.duration * #player.quads) + 1
-    love.graphics.draw(player.spriteSheet, player.quads[spriteNum], pose[map_nb][1] * 64, pose[map_nb][2] * 64, 0, 8)
+    for i = 2, #sprites do
+        local spriteNum = math.floor(sprites[i].currentTime / sprites[i].duration * #sprites[i].quads) + 1
+        love.graphics.draw(sprites[i].spriteSheet, sprites[i].quads[spriteNum], sprites_pose[i - 1][1] * 64, sprites_pose[i - 1][2] * 64, 0, 8)
+    end
+
+    local spriteNum = math.floor(sprites[1].currentTime / sprites[1].duration * #sprites[1].quads) + 1
+    love.graphics.draw(sprites[1].spriteSheet, sprites[1].quads[spriteNum], player_pose[map_nb][1] * 64, player_pose[map_nb][2] * 64, 0, 8)
 end
 
 function move_player( key )
 
     if key == "up" then
-        if map_list[map_nb][pose[map_nb][2]][pose[map_nb][1] + 1] ~= "wall" then
-            pose[map_nb][2] = pose[map_nb][2] - 1
+        if map_list[map_nb][player_pose[map_nb][2]][player_pose[map_nb][1] + 1] ~= "wall" then
+            player_pose[map_nb][2] = player_pose[map_nb][2] - 1
+            update_map()
         end
     end
     if key == "right" then
-        if map_list[map_nb][pose[map_nb][2] + 1][pose[map_nb][1] + 2] ~= "wall" then
-            pose[map_nb][1] = pose[map_nb][1] + 1
+        if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 2] ~= "wall" then
+            player_pose[map_nb][1] = player_pose[map_nb][1] + 1
+            update_map()
         end
     end
     if key == "down" then
-        if map_list[map_nb][pose[map_nb][2] + 2][pose[map_nb][1] + 1] ~= "wall" then
-            pose[map_nb][2] = pose[map_nb][2] + 1
+        if map_list[map_nb][player_pose[map_nb][2] + 2][player_pose[map_nb][1] + 1] ~= "wall" then
+            player_pose[map_nb][2] = player_pose[map_nb][2] + 1
+            update_map()
         end
     end
     if key == "left" then
-        if map_list[map_nb][pose[map_nb][2] + 1][pose[map_nb][1]] ~= "wall" then
-            pose[map_nb][1] = pose[map_nb][1] - 1
+        if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1]] ~= "wall" then
+            player_pose[map_nb][1] = player_pose[map_nb][1] - 1
+            update_map()
         end
     end
-
 end
 
 
@@ -60,18 +74,18 @@ function move_player_in_tab( direction )
 end
 
 function newAnimation(image, width, height, duration)
-    local player = {}
-    player.spriteSheet = image;
-    player.quads = {};
+    local sprites = {}
+    sprites.spriteSheet = image;
+    sprites.quads = {};
 
     for y = 0, image:getHeight() - height, height do
         for x = 0, image:getWidth() - width, width do
-            table.insert(player.quads, love.graphics.newQuad(x, y, width, height, image:getDimensions()))
+            table.insert(sprites.quads, love.graphics.newQuad(x, y, width, height, image:getDimensions()))
         end
     end
 
-    player.duration = duration or 1
-    player.currentTime = 0
+    sprites.duration = duration or 1
+    sprites.currentTime = 0
 
-    return player
+    return sprites
 end
