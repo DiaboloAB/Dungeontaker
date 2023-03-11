@@ -1,4 +1,8 @@
 function love.load()
+    load()
+end
+
+function load()
     player = {}
     player.x = 0;
     player.y = 0;
@@ -8,24 +12,33 @@ function love.load()
     ennemy.y = 32;
     ennemy.radius = 10;
 
+    object = {}
 
-    flame = newAnimation(love.graphics.newImage("flamme_blue.png"), 75, 185, 10)
+    flame = newAnimation(love.graphics.newImage("flamme_blue.png"), 75, 185, 9)
     animation = newAnimation(love.graphics.newImage("oldHero.png"), 16, 18, 6)
+
+    table.insert(object, flame )
+    table.insert(object, animation )
+
     nb = 0
     dt = 0.1
 end
 
 function love.update()
-    animation.currentTime = animation.currentTime + dt
-    if animation.currentTime >= animation.duration then
-        animation.currentTime = animation.currentTime - animation.duration
+
+    for i = 1, #object do
+        object[i].currentTime = object[i].currentTime + dt
+        if object[i].currentTime >= object[i].duration then
+            object[i].currentTime = object[i].currentTime - object[i].duration
+        end
     end
 end
 
 function love.draw()
-    local spriteNum = math.floor(animation.currentTime / animation.duration * #animation.quads) + 1
-    love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], player.x, player.y, 0, 2)
-    love.graphics.draw(flame.spriteSheet, flame.quads[spriteNum], 100, 100, 0, 1)
+    for i = 1, #object do
+        local spriteNum = math.floor(object[i].currentTime / object[i].duration * #object[i].quads) + 1
+        love.graphics.draw(object[i].spriteSheet, object[i].quads[spriteNum], player.x, player.y, 0, 2)
+    end
     love.graphics.circle("fill", ennemy.x, ennemy.y, ennemy.radius)
 end
 

@@ -1,19 +1,19 @@
 require "menu"
 
 function love.load()
+    in_start_menu = true;
     menu_load()
 end
 
 
 function love.update()
-    menu_update()
+    if in_start_menu == true then
+        menu_update()
+    end
 end
 
 function love.draw()
-    menu_draw()
-end
-
-
-function main()
-    love.draw()
+    if in_start_menu == true then
+        menu_draw()
+    end
 end
