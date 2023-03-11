@@ -1,3 +1,4 @@
+local love = require 'love'
 function player_load()
 
     life = 3

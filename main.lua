@@ -1,8 +1,10 @@
+local love = require 'love'
 require "src/menu"
 require "src/player"
 require "src/map"
 require "src/entities"
 require "src/entity"
+require "src/ghost"
 require "src/pause"
 
 function love.load()
@@ -11,6 +13,7 @@ function love.load()
     menu_load()
     map_load()
     player_load()
+    ghost_load()
     pause_load()
 end
 
@@ -20,6 +23,7 @@ function love.update()
         menu_update()
     else
         player_update()
+        ghost_update()
     end
     if life < 0 then
         os.exit()
@@ -32,6 +36,7 @@ function love.draw()
     else
         map_draw()
         player_draw()
+        ghost_draw()
     end
     if (pause_button == false) then
         pause_draw()
@@ -48,6 +53,7 @@ end
 function love.keypressed( key )
     if in_start_menu == false then
         move_player( key )
+        move_ghost( key )
     if pause_button == true then
             pause_menu_true( key )
             goto ici
