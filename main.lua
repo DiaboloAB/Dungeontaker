@@ -23,3 +23,15 @@ function love.draw()
         player_draw()
     end
 end
+
+function love.mousepressed(x, y, button, istouch)
+    if in_start_menu == true then
+        button_menu(x, y, button)
+    end
+end
+
+function love.keypressed( key )
+    if in_start_menu == false then
+        move_player( key )
+    end
+end

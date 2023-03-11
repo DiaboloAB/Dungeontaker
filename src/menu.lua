@@ -38,9 +38,7 @@ function menu_draw()
     love.graphics.draw(cursor, x, y, 0, 0.3, 0.3)
 end
 
-
-function love.mousepressed(x, y, button, istouch)
-
+function button_menu (x, y, button)
     width_start = start:getWidth()
     height_start = start:getHeight()
     width_quit = quit:getWidth()
@@ -54,7 +52,7 @@ function love.mousepressed(x, y, button, istouch)
             love.window.close()
             os.exit()
         end
-     end
+    end
 end
 
 
