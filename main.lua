@@ -38,9 +38,9 @@ function love.draw()
     end
 end
 
-function love.mousepressed(x, y, button, istouch)
+function love.mousepressed(x, y, button, istouch, key)
     if in_start_menu == true then
-        button_menu(x, y, button)
+        button_menu(x, y, button, key)
     end
 
 end
@@ -54,6 +54,12 @@ function love.keypressed( key )
         end
     if pause_button == false then
             pause_menu_false( key )
+        end
+    end
+
+    if in_start_menu == true then
+        if key == "space" then
+            in_start_menu = false
         end
     end
     ::ici::

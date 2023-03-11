@@ -37,7 +37,7 @@ function menu_draw()
     love.graphics.draw(cursor, x, y, 0, 0.3, 0.3)
 end
 
-function button_menu (x, y, button)
+function button_menu (x, y, button, key)
     local width_start = start:getWidth()
     local height_start = start:getHeight()
     local width_quit = quit:getWidth()
@@ -47,6 +47,7 @@ function button_menu (x, y, button)
         if width_start + 200 > x  and x > 200 and  height_start  +  700 > y  and y > 700 then
             in_start_menu = false
         end
+
         if width_quit + 1420 > x  and x > 1420 and  height_quit +  700 > y  and y > 700 then
             love.window.close()
             os.exit()
