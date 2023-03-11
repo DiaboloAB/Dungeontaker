@@ -14,7 +14,6 @@ end
 
 
 
-
 function menu_update()
     animation.currentTime = animation.currentTime + dt
     if animation.currentTime >= animation.duration then
