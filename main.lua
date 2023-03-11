@@ -44,7 +44,7 @@ function love.draw()
             reset()
         end
     end
-    if (pause_button == false) then
+    if (pause_button == false and life > 0) then
         pause_draw()
     end
 end
