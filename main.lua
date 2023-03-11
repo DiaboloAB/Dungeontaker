@@ -1,5 +1,5 @@
-require "menu"
-require "player"
+require "src/menu"
+require "src/player"
 
 function love.load()
     in_start_menu = true;
@@ -19,5 +19,7 @@ end
 function love.draw()
     if in_start_menu == true then
         menu_draw()
+    else
+        player_draw()
     end
 end

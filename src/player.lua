@@ -1,19 +1,25 @@
 
 
 function player_load()
-    player = {}
-    player.x = 0;
-    player.y = 0;
+    pose = {}
+    pose.x = 0;
+    pose.y = 0;
 
     player = newAnimation(love.graphics.newImage("sprites/player.png"), 8, 8, 6)
     
     dt = 0.1
 end
 
+function player_update()
+    player.currentTime = player.currentTime + dt
+    if player.currentTime >= player.duration then
+        player.currentTime = player.currentTime - player.duration
+    end
+end
 
 function player_draw()
     local spriteNum = math.floor(player.currentTime / player.duration * #player.quads) + 1
-    love.graphics.draw(player.spriteSheet, player.quads[spriteNum], player.x, player.y, 0, 2)
+    love.graphics.draw(player.spriteSheet, player.quads[spriteNum], pose.x, pose.y, 0, 1)
 end
 
 

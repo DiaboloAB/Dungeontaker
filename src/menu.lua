@@ -48,10 +48,11 @@ function love.mousepressed(x, y, button, istouch)
 
     if button == 1 then
         if width_start + 200 > x  and x > 200 and  height_start  +  700 > y  and y > 700 then
-            print("start")
+            in_start_menu = false
         end
         if width_quit + 1420 > x  and x > 1420 and  height_quit +  700 > y  and y > 700 then
-            print("sortie")
+            love.window.close()
+            os.exit()
         end
      end
 end
