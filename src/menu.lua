@@ -48,6 +48,9 @@ function button_menu (x, y, button, key)
             in_start_menu = false
         end
 
+        if key == "space" then
+            in_start_menu = false
+        end
         if width_quit + 1420 > x  and x > 1420 and  height_quit +  700 > y  and y > 700 then
             love.window.close()
             os.exit()

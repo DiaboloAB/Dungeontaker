@@ -47,6 +47,9 @@ function love.mousepressed(x, y, button, istouch, key)
     if in_start_menu == true then
         button_menu(x, y, button, key)
     end
+    if pause_button == false then
+        pause_menu(x, y, button, key)
+    end
 
 end
 
