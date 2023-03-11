@@ -11,7 +11,7 @@ function double(one_tab)
                 if (one_tab[x] == 11) then
                 grid[i][j - 1] = "fire"
             end
-            if (one_tab[x] == "4") then
+            if (one_tab[x] == 4) then
                 grid[i][j - 1] = "door"
             end
             if (one_tab[x] == 0) then
