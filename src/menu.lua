@@ -39,10 +39,10 @@ function menu_draw()
 end
 
 function button_menu (x, y, button)
-    width_start = start:getWidth()
-    height_start = start:getHeight()
-    width_quit = quit:getWidth()
-    height_quit = quit:getHeight()
+    local width_start = start:getWidth()
+    local height_start = start:getHeight()
+    local width_quit = quit:getWidth()
+    local height_quit = quit:getHeight()
 
     if button == 1 then
         if width_start + 200 > x  and x > 200 and  height_start  +  700 > y  and y > 700 then
