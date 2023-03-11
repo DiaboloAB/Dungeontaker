@@ -2,6 +2,7 @@ require "src/menu"
 require "src/player"
 
 function love.load()
+    love.graphics.setDefaultFilter( "nearest" )
     in_start_menu = true;
     menu_load()
     player_load()
