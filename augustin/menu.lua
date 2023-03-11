@@ -25,8 +25,6 @@ end
 
 
 
-
-
 function menu_draw()
     local x, y = love.mouse.getPosition()
     love.graphics.draw(bg_menu, 0, 0)
@@ -41,7 +39,19 @@ function menu_draw()
 end
 
 
+function love.mousepressed(x, y, button, istouch)
 
+    width_start = start:getWidth()
+    height_start = start:getHeight()
+    width_quit = quit:getWidth()
+    height_quit = quit:getHeight()
+
+    if button == 1 then
+        if width_start + 200 > x  and x > 200 and  height_start  +  700 > y  and y > 700 then
+        print("coucou")
+        end
+     end
+end
 
 
 function menu_animation(image, width, height, duration)
