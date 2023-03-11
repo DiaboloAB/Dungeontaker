@@ -18,16 +18,13 @@ function player_load()
     }
 
     sprites_pose = {
-        {14, 7}
     }
 
     sprites = {}
-
     player = newAnimation(love.graphics.newImage("sprites/player.png"), 8, 8, 6)
-    fire = newAnimation(love.graphics.newImage("sprites/fire.png"), 8, 8, 6)
-
     table.insert(sprites, player)
-    table.insert(sprites, fire)
+    read_map()
+
 end
 
 function player_update()
