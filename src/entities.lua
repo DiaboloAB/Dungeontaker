@@ -15,6 +15,13 @@ function read_map()
     end
 end
 
+function reset()
+    map_nb = 1
+    life = 3
+    erase_sprite()
+    read_map()
+end
+
 function erase_sprite()
     local sprites_len = #sprites
     local pose_len = #sprites
@@ -40,6 +47,6 @@ function update_map()
     if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "door" then
         erase_sprite()
         map_nb = map_nb + 1
-        -- read_map()
+        read_map()
     end
 end

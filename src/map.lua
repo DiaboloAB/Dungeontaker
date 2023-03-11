@@ -25,7 +25,7 @@ end
 
 function map_load()
 
-    map_nb = 7;
+    map_nb = 1;
     map_png = {}
 
     map_1_png = love.graphics.newImage("maps/map_1.png")
@@ -48,14 +48,14 @@ function map_load()
 
     map_list = {}
 
+    table.insert( map_list, double(require('luamap.map_1') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_1') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_3') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_4') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_5') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_6') .layers[2].data))
     table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
-    table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
-    table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
-    table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
-    table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
-    table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
-    table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
-    table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_8') .layers[2].data))
 
 end
 

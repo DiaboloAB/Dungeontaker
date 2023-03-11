@@ -26,7 +26,7 @@ function love.update()
         ghost_update()
     end
     if life < 0 then
-        os.exit()
+        reset()
     end
 end
 
