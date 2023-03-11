@@ -1,4 +1,6 @@
 function menu_load()
+    love.mouse.setVisible(false)
+    cursor = love.graphics.newImage("asset_menu/cursor.png")
     start = love.graphics.newImage("asset_menu/start.png")
     quit = love.graphics.newImage("asset_menu/quit.png")
     sign = love.graphics.newImage("asset_menu/wood_sign.png")
@@ -9,6 +11,10 @@ function menu_load()
     dt = 0.1
 end
 
+
+
+
+
 function menu_update()
     animation.currentTime = animation.currentTime + dt
     if animation.currentTime >= animation.duration then
@@ -16,7 +22,13 @@ function menu_update()
     end
 end
 
+
+
+
+
+
 function menu_draw()
+    local x, y = love.mouse.getPosition()
     love.graphics.draw(bg_menu, 0, 0)
     love.graphics.draw(sign, 960 - 240, -80)
     love.graphics.draw(start,  200, 700)
@@ -25,7 +37,12 @@ function menu_draw()
     local spriteNum = math.floor(animation.currentTime / animation.duration * #animation.quads) + 1
     love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], 80, 350, 0, 1)
     love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], 1750, 350, 0, 1)
+    love.graphics.draw(cursor, x, y, 0, 0.3, 0.3)
 end
+
+
+
+
 
 function menu_animation(image, width, height, duration)
     local animation = {}
@@ -40,3 +57,4 @@ function menu_animation(image, width, height, duration)
     animation.currentTime = 0
     return animation
 end
+
