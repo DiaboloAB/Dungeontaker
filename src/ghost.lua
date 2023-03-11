@@ -1,22 +1,7 @@
 local love = require 'love'
 
 function ghost_load()
-    pose_ghost = {
-        {13, 5},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-        {1, 1},
-    }
-
-    local _x, _y
-
+    pose_ghost = {13, 5}
     ghost = newAnimation(love.graphics.newImage("sprites/ghost.png"), 8, 8, 6)
 end
 
@@ -29,15 +14,15 @@ end
 
 function ghost_draw()
     local spriteNum = math.floor(ghost.currentTime / ghost.duration * #ghost.quads) + 1
-    love.graphics.draw(ghost.spriteSheet, ghost.quads[spriteNum], pose_ghost[map_nb][1] * 64, pose_ghost[map_nb][2] * 64, 0, 8)
+    love.graphics.draw(ghost.spriteSheet, ghost.quads[spriteNum], pose_ghost[1] * 64, pose_ghost[2] * 64, 0, 8)
 end
 
 function move_ghost( key )
 
     pose_x = player_pose[map_nb][1]
-    pose_ghost_x = pose_ghost[map_nb][1]
+    pose_ghost_x = pose_ghost[1]
     pose_y = player_pose[map_nb][2]
-    pose_ghost_y = pose_ghost[map_nb][2]
+    pose_ghost_y = pose_ghost[2]
 
     if key == "up" then
         if map_list[map_nb][player_pose[map_nb][2]][player_pose[map_nb][1] + 1] then
@@ -55,15 +40,15 @@ function move_ghost( key )
 
             if tmp_X > tmp_Y then
                 if X < 0 then
-                    pose_ghost[map_nb][1] = pose_ghost[map_nb][1] - 1
+                    pose_ghost[1] = pose_ghost[1] - 1
                 else
-                    pose_ghost[map_nb][1] = pose_ghost[map_nb][1] + 1
+                    pose_ghost[1] = pose_ghost[1] + 1
                 end
             else
                 if Y < 0 then
-                    pose_ghost[map_nb][2] = pose_ghost[map_nb][2] - 1
+                    pose_ghost[2] = pose_ghost[2] - 1
                 else
-                    pose_ghost[map_nb][2] = pose_ghost[map_nb][2] + 1
+                    pose_ghost[2] = pose_ghost[2] + 1
                 end
             end
         end
@@ -85,15 +70,15 @@ function move_ghost( key )
 
             if tmp_X > tmp_Y then
                 if X < 0 then
-                    pose_ghost[map_nb][1] = pose_ghost[map_nb][1] - 1
+                    pose_ghost[1] = pose_ghost[1] - 1
                 else
-                    pose_ghost[map_nb][1] = pose_ghost[map_nb][1] + 1
+                    pose_ghost[1] = pose_ghost[1] + 1
                 end
             else
                 if Y < 0 then
-                    pose_ghost[map_nb][2] = pose_ghost[map_nb][2] - 1
+                    pose_ghost[2] = pose_ghost[2] - 1
                 else
-                    pose_ghost[map_nb][2] = pose_ghost[map_nb][2] + 1
+                    pose_ghost[2] = pose_ghost[2] + 1
                 end
             end
         end
@@ -115,15 +100,15 @@ function move_ghost( key )
 
             if tmp_X > tmp_Y then
                 if X < 0 then
-                    pose_ghost[map_nb][1] = pose_ghost[map_nb][1] - 1
+                    pose_ghost[1] = pose_ghost[1] - 1
                 else
-                    pose_ghost[map_nb][1] = pose_ghost[map_nb][1] + 1
+                    pose_ghost[1] = pose_ghost[1] + 1
                 end
             else
                 if Y < 0 then
-                    pose_ghost[map_nb][2] = pose_ghost[map_nb][2] - 1
+                    pose_ghost[2] = pose_ghost[2] - 1
                 else
-                    pose_ghost[map_nb][2] = pose_ghost[map_nb][2] + 1
+                    pose_ghost[2] = pose_ghost[2] + 1
                 end
             end
         end
@@ -146,21 +131,21 @@ function move_ghost( key )
 
             if tmp_X > tmp_Y then
                 if X < 0 then
-                    pose_ghost[map_nb][1] = pose_ghost[map_nb][1] - 1
+                    pose_ghost[1] = pose_ghost[1] - 1
                 else
-                    pose_ghost[map_nb][1] = pose_ghost[map_nb][1] + 1
+                    pose_ghost[1] = pose_ghost[1] + 1
                 end
             else
                 if Y < 0 then
-                    pose_ghost[map_nb][2] = pose_ghost[map_nb][2] - 1
+                    pose_ghost[2] = pose_ghost[2] - 1
                 else
-                    pose_ghost[map_nb][2] = pose_ghost[map_nb][2] + 1
+                    pose_ghost[2] = pose_ghost[2] + 1
                 end
             end
         end
     end
 
     if (pose_ghost_x == pose_x) and (pose_ghost_y == pose_y) then
-        pose_ghost[map_nb][math.random(1, 2)] = pose_ghost[map_nb][1] + math.random(0, 25)
+        pose_ghost[math.random(1, 2)] = pose_ghost[1] + math.random(0, 25)
     end
 end

@@ -2,6 +2,7 @@ local love = require 'love'
 function player_load()
 
     life = 3
+    pot = love.graphics.newImage("sprites/pot.png")
 
     player_pose = {
         {15, 10},
@@ -45,6 +46,9 @@ function player_draw()
 
     local spriteNum = math.floor(sprites[1].currentTime / sprites[1].duration * #sprites[1].quads) + 1
     love.graphics.draw(sprites[1].spriteSheet, sprites[1].quads[spriteNum], player_pose[map_nb][1] * 64, player_pose[map_nb][2] * 64, 0, 8)
+
+    love.graphics.draw(pot, 28 * 64, 1 * 64, 0, 8)
+    love.graphics.print(life, 27 * 64 + 30, 1 * 64, 0, 3, 4)
 end
 
 function move_player( key )
