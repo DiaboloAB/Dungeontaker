@@ -1,3 +1,14 @@
+
+
+
+
+
+
+function entities_load()
+    ghost = Entity(10, 10, newImage("sprites/ghost.png"))
+    print(ghost.x)
+end
+
 function read_map()
     for y = 1, #map_list[map_nb] do
         for x = 1, #map_list[map_nb][y] do

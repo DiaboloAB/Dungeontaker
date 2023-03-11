@@ -1,6 +1,8 @@
 require "src/menu"
 require "src/player"
 require "src/map"
+require "src/entities"
+require "src/entity"
 require "src/pause"
 
 function love.load()
@@ -18,6 +20,9 @@ function love.update()
         menu_update()
     else
         player_update()
+    end
+    if life < 0 then
+        os.exit()
     end
 end
 
