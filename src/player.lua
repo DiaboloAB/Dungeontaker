@@ -101,3 +101,21 @@ function newAnimation(image, width, height, duration)
 
     return sprites
 end
+
+-- function spikes_gestion()
+--     for y = 1, #map_list[map_nb] do
+--         for x = 1, #map_list[map_nb][y] do
+--             if map_list[map_nb][y][x] == "spk2" then
+--                 map_list[map_nb][y][x] = "spk0"
+--                 goto continue
+--             end
+--             if map_list[map_nb][y][x] == "spk1" then
+--                 map_list[map_nb][y][x] = "spk2"
+--             end
+--             if map_list[map_nb][y][x] == "spk0" then
+--                 map_list[map_nb][y][x] = "spk1"
+--             end
+--             ::continue::
+--         end
+--     end
+-- end

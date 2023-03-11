@@ -61,6 +61,7 @@ function erase_sprite()
 end
 
 function update_map()
+    spikes_gestion()
     print(map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1])
     if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "fire" or  map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "spk3" then
         life = life - 1
