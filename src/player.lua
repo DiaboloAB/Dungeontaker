@@ -1,12 +1,16 @@
 function player_load()
-    pose = {}
-    pose.x = 1;
-    pose.y = 1;
-
-    map = {
-        {"wall", "wall", "wall"},
-        {"wall", "empty", "empty"},
-        {"wall", "empty", "empty"}
+    pose = {
+        {15, 10},
+        {1, 1},
+        {1, 1},
+        {1, 1},
+        {1, 1},
+        {1, 1},
+        {1, 1},
+        {1, 1},
+        {1, 1},
+        {1, 1},
+        {1, 1},
     }
 
     player = newAnimation(love.graphics.newImage("sprites/player.png"), 8, 8, 6)
@@ -21,29 +25,29 @@ end
 
 function player_draw()
     local spriteNum = math.floor(player.currentTime / player.duration * #player.quads) + 1
-    love.graphics.draw(player.spriteSheet, player.quads[spriteNum], pose.x * 64, pose.y * 64, 0, 8)
+    love.graphics.draw(player.spriteSheet, player.quads[spriteNum], pose[map_nb][1] * 64, pose[map_nb][2] * 64, 0, 8)
 end
 
 function move_player( key )
 
     if key == "up" then
-        if map[pose.y][pose.x + 1] ~= "wall" then
-            pose.y = pose.y - 1
+        if map_list[map_nb][pose[map_nb][2]][pose[map_nb][1] + 1] ~= "wall" then
+            pose[map_nb][2] = pose[map_nb][2] - 1
         end
     end
     if key == "right" then
-        if map[pose.y + 1][pose.x + 2] ~= "wall" then
-            pose.x = pose.x + 1
+        if map_list[map_nb][pose[map_nb][2] + 1][pose[map_nb][1] + 2] ~= "wall" then
+            pose[map_nb][1] = pose[map_nb][1] + 1
         end
     end
     if key == "down" then
-        if map[pose.y + 2][pose.x + 1] ~= "wall" then
-            pose.y = pose.y + 1
+        if map_list[map_nb][pose[map_nb][2] + 2][pose[map_nb][1] + 1] ~= "wall" then
+            pose[map_nb][2] = pose[map_nb][2] + 1
         end
     end
     if key == "left" then
-        if map[pose.y + 1][pose.x] ~= "wall" then
-            pose.x = pose.x - 1
+        if map_list[map_nb][pose[map_nb][2] + 1][pose[map_nb][1]] ~= "wall" then
+            pose[map_nb][1] = pose[map_nb][1] - 1
         end
     end
 
