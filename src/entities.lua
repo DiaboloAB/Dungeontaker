@@ -16,10 +16,31 @@ function read_map()
 end
 
 function reset()
+
+    pose_save = {
+        {15, 10},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+        {14, 7},
+    }
+
     map_nb = 1
     life = 3
     erase_sprite()
     read_map()
+
+    for i = 1, #player_pose do
+        player_pose[i][1] = pose_save[i][1]
+        player_pose[i][2] = pose_save[i][2]
+    end
 end
 
 function erase_sprite()

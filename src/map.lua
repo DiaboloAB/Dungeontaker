@@ -6,9 +6,9 @@ function double(one_tab)
 
         for j = 1, 30 do
             if (one_tab[x] == 12) then
-                grid[i][j - 1] = "wall" -- Fill the values here
+                grid[i][j - 1] = "wall"
             end
-                if (one_tab[x] == 11) then
+            if (one_tab[x] == 11) then
                 grid[i][j - 1] = "fire"
             end
             if (one_tab[x] == 4) then
