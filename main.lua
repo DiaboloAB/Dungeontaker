@@ -4,17 +4,20 @@ require "src/player"
 require "src/map"
 require "src/entities"
 require "src/entity"
+require "src/game_over"
 require "src/ghost"
 require "src/pause"
 
 function love.load()
     love.graphics.setDefaultFilter( "nearest" )
     in_start_menu = true;
+    in_game_over = true;
     menu_load()
     map_load()
     player_load()
     ghost_load()
     pause_load()
+    game_over_load()
 end
 
 
@@ -25,9 +28,6 @@ function love.update()
         player_update()
         ghost_update()
     end
-    if life < 0 then
-        reset()
-    end
 end
 
 function love.draw()
@@ -37,6 +37,12 @@ function love.draw()
         map_draw()
         player_draw()
         ghost_draw()
+    end
+    if life < 0 then
+        game_over_draw()
+        if love.keyboard.isDown("space") then
+            reset()
+        end
     end
     if (pause_button == false) then
         pause_draw()
@@ -65,7 +71,6 @@ function love.keypressed( key )
             pause_menu_false( key )
         end
     end
-
     if in_start_menu == true then
         if key == "space" then
             in_start_menu = false
