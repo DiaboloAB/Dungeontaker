@@ -6,8 +6,6 @@ require "src/map"
 require "src/entities"
 require "src/entity"
 require "src/game_over"
-require "src/ghost"
-require "src/slime"
 require "src/pause"
 require "src/monsters"
 
