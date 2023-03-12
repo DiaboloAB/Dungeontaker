@@ -124,6 +124,8 @@ function move_player( key )
         if (pot_list[i].killed == false and player_pose[map_nb][1] + dir.y == pot_list[i].pos[1] and player_pose[map_nb][2] + dir.x == pot_list[i].pos[2]) then
             if math.random(1, 3) == 1 then
                 ruby_count = ruby_count + 1
+                love.audio.setVolume(1)
+                love.audio.play(effect[3])
             end
             pot_list[i].killed = true
             goto this_one
@@ -168,6 +170,8 @@ function move_player( key )
             erase_sprite()
             lvl = lvl + 2
             ruby_count = ruby_count + 1
+            love.audio.setVolume(1)
+            love.audio.play(effect[3])
             if map_nb == 9 then
                 map_nb = 10
             elseif lvl > 15 then

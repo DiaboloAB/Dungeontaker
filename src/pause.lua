@@ -66,15 +66,11 @@ function pause_menu (x, y, button)
         end
         if width_music + 915 > x and x > 915 and height_music + 485 > y and y > 485 and music_button == true then
             music_button = false
-            start_audio = true
-            goto la
-        end
-        if 995 > x and x > 915 and 558 > y and y > 465 then
-            music_button = true
             start_audio = false
+        elseif 995 > x and x > 915 and 558 > y and y > 465 then
+            music_button = true
+            start_audio = true
         end
-    ::la::
-
     end
 end
 

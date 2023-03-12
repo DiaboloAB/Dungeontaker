@@ -80,12 +80,16 @@ function update_map()
     end
     if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "fire" then
         life = life - 1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
     if spike_state == 3 then
         for i = 1, #spike_pose do
             if player_pose[map_nb][1] == spike_pose[i][1] then
                 if player_pose[map_nb][2] == spike_pose[i][2] then
                     life = life - 1
+                    love.audio.setVolume(1)
+                    love.audio.play(effect[1])
                 end
             end
         end
