@@ -69,34 +69,27 @@ function player_draw()
 end
 
 function move_player( key )
-
+    local dir = {}
+    dir.x = 0
+    dir.y = 0
     if key == "up" then
-        if map_list[map_nb][player_pose[map_nb][2]][player_pose[map_nb][1] + 1] ~= "wall" then
-            player_pose[map_nb][2] = player_pose[map_nb][2] - 1
-            update_map()
-            timer = 10
-        end
+        dir.x = -1
     end
     if key == "right" then
-        if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 2] ~= "wall" then
-            player_pose[map_nb][1] = player_pose[map_nb][1] + 1
-            update_map()
-            timer = 10
-        end
+        dir.y = 1
     end
     if key == "down" then
-        if map_list[map_nb][player_pose[map_nb][2] + 2][player_pose[map_nb][1] + 1] ~= "wall" then
-            player_pose[map_nb][2] = player_pose[map_nb][2] + 1
-            update_map()
-            timer = 10
-        end
+        dir.x = 1
     end
     if key == "left" then
-        if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1]] ~= "wall" then
-            player_pose[map_nb][1] = player_pose[map_nb][1] - 1
-            update_map()
-            timer = 10
-        end
+        dir.y = -1
+    end
+
+    if map_list[map_nb][player_pose[map_nb][2] + 1 + dir.x][player_pose[map_nb][1] + 1 + dir.y] ~= "wall" then
+        player_pose[map_nb][1] = player_pose[map_nb][1] + dir.y
+        player_pose[map_nb][2] = player_pose[map_nb][2] + dir.x
+        update_map()
+        timer = 10
     end
 end
 
