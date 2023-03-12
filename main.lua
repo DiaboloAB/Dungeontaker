@@ -14,6 +14,7 @@ function love.load()
     love.graphics.setDefaultFilter( "nearest" )
     in_start_menu = true;
     in_game_over = true;
+    over = false;
     audio_load()
     menu_load()
     map_load()
@@ -28,7 +29,7 @@ end
 function love.update()
     if in_start_menu == true then
         menu_update()
-    else
+    elseif over == false and pause_button == true then
         player_update()
         ghost_update()
         slime_update()
@@ -76,14 +77,16 @@ end
 
 function love.keypressed( key )
     if in_start_menu == false then
-        move_player( key )
-        move_ghost( key )
-        move_slime( key )
-    if pause_button == true then
+        if over == false and pause_button == true then
+            move_player( key )
+            move_ghost( key )
+            move_slime( key )
+        end
+        if pause_button == true then
             pause_menu_true( key )
             goto ici
         end
-    if pause_button == false then
+        if pause_button == false then
             pause_menu_false( key )
         end
     end
