@@ -97,7 +97,9 @@ function check_win()
         if ruby_count < 10 then
             life = 0
         else
-            
+            victory = true
+            timer_speedrun_load = timer_speedrun
+        end
     end
 end
 

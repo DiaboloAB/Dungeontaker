@@ -23,6 +23,11 @@ function love.load()
     pause_load()
     game_over_load()
     pot_load()
+
+    timer_speedrun_load = 0
+    victory = false
+    victory_img = love.graphics.newImage("sprites/victory.png")
+
 end
 
 
@@ -50,11 +55,16 @@ function love.draw()
         game_over_draw()
         if love.keyboard.isDown("space") then
             over = false
+            victory = false
             reset()
         end
     end
     if (pause_button == false and life > -1) then
         pause_draw()
+    end
+    if victory == true then
+        love.graphics.draw(victory_img, 0, 0, 0)
+        love.graphics.print(string.sub(tostring(timer_speedrun_load), 1, 4), 1 * 64 + 30, 3 * 64, 0, 3, 4)
     end
 end
 
