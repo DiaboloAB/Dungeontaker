@@ -31,6 +31,7 @@ function reset()
     }
 
     timer_speedrun = 0.0000
+    timer = 10
     map_nb = 1
     life = 3
     erase_sprite()

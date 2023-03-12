@@ -74,24 +74,28 @@ function move_player( key )
         if map_list[map_nb][player_pose[map_nb][2]][player_pose[map_nb][1] + 1] ~= "wall" then
             player_pose[map_nb][2] = player_pose[map_nb][2] - 1
             update_map()
+            timer = 10
         end
     end
     if key == "right" then
         if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 2] ~= "wall" then
             player_pose[map_nb][1] = player_pose[map_nb][1] + 1
             update_map()
+            timer = 10
         end
     end
     if key == "down" then
         if map_list[map_nb][player_pose[map_nb][2] + 2][player_pose[map_nb][1] + 1] ~= "wall" then
             player_pose[map_nb][2] = player_pose[map_nb][2] + 1
             update_map()
+            timer = 10
         end
     end
     if key == "left" then
         if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1]] ~= "wall" then
             player_pose[map_nb][1] = player_pose[map_nb][1] - 1
             update_map()
+            timer = 10
         end
     end
 end
