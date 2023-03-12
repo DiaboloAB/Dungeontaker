@@ -56,6 +56,12 @@ function move_zombie(slime, the_map)
             goto this_next_next
         end
     end
+    for i = 1, nb_pot[map_nb] do
+        if (pot_list[i].count ~= slime.count and pot_list[i].killed == false and
+            pot_list[i].pos[1] == slime.pos[1] + dir.x and pot_list[i].pos[2] == slime.pos[2] + dir.y) then
+            goto this_next_next
+        end
+    end
     if (player_pose[map_nb][1] == slime.pos[1] + dir.x and player_pose[map_nb][2] == slime.pos[2] + dir.y) then
         goto this_next_next
     end

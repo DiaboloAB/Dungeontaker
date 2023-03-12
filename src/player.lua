@@ -114,6 +114,12 @@ function move_player( key )
             goto this_one
         end
     end
+    for i = 1, nb_pot[map_nb] do
+        if (pot_list[i].killed == false and player_pose[map_nb][1] + dir.y == pot_list[i].pos[1] and player_pose[map_nb][2] + dir.x == pot_list[i].pos[2]) then
+            pot_list[i].killed = true
+            goto this_one
+        end
+    end
     if map_list[map_nb][player_pose[map_nb][2] + 1 + dir.x][player_pose[map_nb][1] + 1 + dir.y] == "door" then
         if check_monster_killed() == false then
             erase_sprite()
