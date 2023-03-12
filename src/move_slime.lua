@@ -4,33 +4,51 @@ require "src.map"
 function fantom_attack(slime)
     if (player_pose[map_nb][1] == slime.pos[1] + 1 and player_pose[map_nb][2] == slime.pos[2]) then
         reverse = -1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
     if (player_pose[map_nb][1] == slime.pos[1] - 1 and player_pose[map_nb][2] == slime.pos[2]) then
         reverse = -1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
     if (player_pose[map_nb][1] == slime.pos[1] and player_pose[map_nb][2] == slime.pos[2] + 1) then
         reverse = -1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
     if (player_pose[map_nb][1] == slime.pos[1] and player_pose[map_nb][2] == slime.pos[2] - 1) then
         reverse = -1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
     if (player_pose[map_nb][1] == slime.pos[1] and player_pose[map_nb][2] == slime.pos[2]) then
         reverse = -1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
 end
 
 function slime_attack(slime)
     if (player_pose[map_nb][1] == slime.pos[1] + 1 and player_pose[map_nb][2] == slime.pos[2]) then
         life = life - 1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
     if (player_pose[map_nb][1] == slime.pos[1] - 1 and player_pose[map_nb][2] == slime.pos[2]) then
         life = life - 1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
     if (player_pose[map_nb][1] == slime.pos[1] and player_pose[map_nb][2] == slime.pos[2] + 1) then
         life = life - 1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
     if (player_pose[map_nb][1] == slime.pos[1] and player_pose[map_nb][2] == slime.pos[2] - 1) then
         life = life - 1
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
     end
 end
 

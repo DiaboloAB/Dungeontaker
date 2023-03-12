@@ -26,6 +26,7 @@ end
 
 
 function love.update()
+    audio_update()
     if in_start_menu == true then
         menu_update()
     elseif over == false and pause_button == true then
@@ -60,13 +61,6 @@ function love.mousepressed(x, y, button, istouch, key)
         button_menu(x, y, button, key)
     end
 
-    if start_audio == true then
-        love.audio.play(source)
-    end
-    if start_audio == false then
-        love.audio.pause(source)
-    end
-
     if pause_button == false then
         pause_menu(x, y, button, key)
     end
@@ -77,6 +71,8 @@ function love.keypressed( key )
     if in_start_menu == false then
         if over == false and pause_button == true then
             if move_player( key ) == 1 then
+                love.audio.setVolume(1)
+                love.audio.play(effect[2])
                 monsters_move()
                 timer = 10
             end
