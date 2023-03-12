@@ -41,7 +41,8 @@ function reset()
     reverse = 1
     erase_sprite()
     read_map()
-
+    monster = get_monster(map_nb)
+    pot_list = get_pot(map_nb)
     for i = 1, #player_pose do
         player_pose[i][1] = pose_save[i][1]
         player_pose[i][2] = pose_save[i][2]

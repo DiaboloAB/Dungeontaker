@@ -54,7 +54,7 @@ function pause_menu (x, y, button)
 
         if x > 705 and x < 820 and y < 690 and y > 585 then
             pause_button = true
-            life = -1
+            life = 0
         end
         if width_resume + 800 > x  and x > 855 and  height_resume  +  530 > y  and y > 595 then
             pause_button = true

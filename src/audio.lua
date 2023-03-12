@@ -7,6 +7,7 @@ function audio_load()
     source[2] = love.audio.newSource("sound/TheTrial.ogg", "stream")
     source[3] = love.audio.newSource("sound/BountyHunter.ogg", "stream")
     source[4] = love.audio.newSource("sound/Monolith.ogg", "stream")
+    
     effect[1] = love.audio.newSource("sound/Hit_hurt.wav", "static")
     effect[2] = love.audio.newSource("sound/move.wav", "static")
     effect[3] = love.audio.newSource("sound/coin.wav", "static")

@@ -152,3 +152,92 @@ function move_slime(slime, the_map)
     fantom_attack(slime)
     ::this_next_next::
 end
+
+function move_pion(slime, the_map)
+    local p_pos = {}
+    local s_pos = {}
+    p_pos.x = player_pose[map_nb][1]
+    p_pos.y = player_pose[map_nb][2]
+    s_pos.x = slime.pos[1]
+    s_pos.y = slime.pos[2]
+    if (the_map[slime.pos[2] + 1 + 1][slime.pos[1] + 1] == "wall") then
+        goto this_next_next
+    end
+    if (player_pose[map_nb][1] == slime.pos[1] + 1 and player_pose[map_nb][2] == slime.pos[2] - 1) then
+        slime.pos[2] = slime.pos[2] - 1
+        slime.pos[1] = slime.pos[1] + 1
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+        goto this_next_next
+    end
+    if (player_pose[map_nb][1] == slime.pos[1] + 1 and player_pose[map_nb][2] == slime.pos[2] + 1) then
+        slime.pos[2] = slime.pos[2] + 1
+        slime.pos[1] = slime.pos[1] + 1
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+        goto this_next_next
+    end
+    ::this_next::
+    slime.pos[2] = slime.pos[2] + 1
+    fantom_attack(slime)
+    ::this_next_next::
+end
+
+function move_knight(slime, the_map)
+    if (player_pose[map_nb][1] == slime.pos[1] + 2 and player_pose[map_nb][2] == slime.pos[2] - 1) then
+        slime.pos[2] = slime.pos[2] - 1
+        slime.pos[1] = slime.pos[1] + 2
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+    elseif (player_pose[map_nb][1] == slime.pos[1] + 2 and player_pose[map_nb][2] == slime.pos[2] + 1) then
+        slime.pos[2] = slime.pos[2] + 1
+        slime.pos[1] = slime.pos[1] + 2
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+        goto this_next_next
+    elseif (player_pose[map_nb][1] == slime.pos[1] - 2 and player_pose[map_nb][2] == slime.pos[2] - 1) then
+        slime.pos[2] = slime.pos[2] - 1
+        slime.pos[1] = slime.pos[1] - 2
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+    elseif (player_pose[map_nb][1] == slime.pos[1] - 2 and player_pose[map_nb][2] == slime.pos[2] + 1) then
+        slime.pos[2] = slime.pos[2] + 1
+        slime.pos[1] = slime.pos[1] - 2
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+        goto this_next_next
+    elseif (player_pose[map_nb][1] == slime.pos[1] + 1 and player_pose[map_nb][2] == slime.pos[2] - 2) then
+        slime.pos[2] = slime.pos[2] - 2
+        slime.pos[1] = slime.pos[1] + 1
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+    elseif (player_pose[map_nb][1] == slime.pos[1] + 1 and player_pose[map_nb][2] == slime.pos[2] + 2) then
+        slime.pos[2] = slime.pos[2] + 2
+        slime.pos[1] = slime.pos[1] + 1
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+        goto this_next_next
+    elseif (player_pose[map_nb][1] == slime.pos[1] - 1 and player_pose[map_nb][2] == slime.pos[2] - 2) then
+        slime.pos[2] = slime.pos[2] - 2
+        slime.pos[1] = slime.pos[1] - 1
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+    elseif (player_pose[map_nb][1] == slime.pos[1] - 1 and player_pose[map_nb][2] == slime.pos[2] + 2) then
+        slime.pos[2] = slime.pos[2] + 2
+        slime.pos[1] = slime.pos[1] - 1
+        life = 0
+        love.audio.setVolume(1)
+        love.audio.play(effect[1])
+        goto this_next_next
+    end
+    ::this_next_next::
+end

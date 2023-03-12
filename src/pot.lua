@@ -36,12 +36,14 @@ function get_pot(map_id)
     if map_id == 9 then
         monster_temp = {init_pot(16, 7)}
     end
-
+    if map_id == 10 then
+        monster_temp = {init_pot(16, 7), init_pot(17, 7)}
+    end
     return monster_temp
 end
 
 function pot_load()
-    nb_pot = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    nb_pot = {1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0}
     pot_list = get_pot(map_nb)
 end
 

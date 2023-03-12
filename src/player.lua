@@ -1,5 +1,6 @@
 local love = require 'love'
 function player_load()
+    vivant = true
     math.randomseed(os.time())
     lvl = 1
     reverse = 1
@@ -91,6 +92,15 @@ function player_draw()
     love.graphics.print(string.sub(tostring(timer_speedrun), 1, 4), 1 * 64 + 30, 3 * 64, 0, 3, 4)
 end
 
+function check_win()
+    if map_np == 10 then
+        if ruby_count < 10 then
+            life = 0
+        else
+            
+    end
+end
+
 function move_player( key )
     local ret = 0
     local dir = {}
@@ -117,6 +127,10 @@ function move_player( key )
     for i = 1, nb_monsters[map_nb] do
         if (monster[i].killed == false and player_pose[map_nb][1] + dir.y == monster[i].pos[1] and player_pose[map_nb][2] + dir.x == monster[i].pos[2]) then
             monster[i].killed = true
+            if (monster[i].id == "wizard") then
+                print("wizard killed")
+                vivant = false
+            end
             goto this_one
         end
     end
@@ -124,7 +138,7 @@ function move_player( key )
         if (pot_list[i].killed == false and player_pose[map_nb][1] + dir.y == pot_list[i].pos[1] and player_pose[map_nb][2] + dir.x == pot_list[i].pos[2]) then
             if math.random(1, 3) == 1 then
                 ruby_count = ruby_count + 1
-                love.audio.setVolume(1)
+                love.audio.setVolume(0.5)
                 love.audio.play(effect[3])
             end
             pot_list[i].killed = true
@@ -132,12 +146,14 @@ function move_player( key )
         end
     end
     if map_list[map_nb][player_pose[map_nb][2] + 1 + dir.x][player_pose[map_nb][1] + 1 + dir.y] == "door" then
-        if check_monster_killed() == false then
+        if check_monster_killed() == false or map_nb == 1 then
+            check_win()
+            
             erase_sprite()
             lvl = lvl + 1
             if map_nb == 9 then
                 map_nb = 10
-            elseif lvl > 15 then
+            elseif lvl > 7 then
                 map_nb = 9
             else
                 map_nb = math.random(2, 8)
@@ -174,7 +190,7 @@ function move_player( key )
             love.audio.play(effect[3])
             if map_nb == 9 then
                 map_nb = 10
-            elseif lvl > 15 then
+            elseif lvl > 7 then
                 map_nb = 9
             else
                 map_nb = math.random(2, 8)

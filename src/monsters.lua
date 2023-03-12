@@ -37,6 +37,12 @@ end
 function get_monster(map_id)
     local monster_temp = {}
 
+    if map_id == 1 and vivant == true then
+        monster_temp = {init_monster(1,"wizard", 17, 7)}
+    end
+    if map_id == 1 and vivant == false then
+        monster_temp = {init_monster(1,"ghost_wizard", 17, 7)}
+    end
     if map_id == 2 then
         monster_temp = {init_monster(1,"zombie", 17, 8)}
     end
@@ -48,13 +54,16 @@ function get_monster(map_id)
         monster_temp = {init_monster(1,"zombie", 16, 7)}
     end
     if map_id == 5 then
-        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20))}
+        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20)),
+        init_monster(1,"pion", 10, 10)}
     end
     if map_id == 6 then
         monster_temp = {init_monster(1,"zombie", 16, 7)}
     end
     if map_id == 7 then
-        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20))}
+        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20)),
+        init_monster(1,"pion", 13, 6),
+        init_monster(1,"knight", 13, 6)}
     end
     if map_id == 8 then
         monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20))}
@@ -70,7 +79,7 @@ function get_monster(map_id)
 end
 
 function monsters_load()
-    nb_monsters = {0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    nb_monsters = {1, 1, 2, 1, 2, 1, 3, 1, 1, 1, 1, 1}
     monster = get_monster(map_nb)
 end
 
@@ -84,6 +93,12 @@ function monsters_move()
         end
         if (monster[i].id == "slime" and monster[i].killed == false) then
             move_slime(monster[i], map_list[map_nb])
+        end
+        if (monster[i].id == "pion" and monster[i].killed == false) then
+            move_pion(monster[i], map_list[map_nb])
+        end
+        if (monster[i].id == "knight" and monster[i].killed == false) then
+            move_knight(monster[i], map_list[map_nb])
         end
     end
 end
