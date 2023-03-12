@@ -53,7 +53,6 @@ function pause_menu (x, y, button)
 
 
         if x > 705 and x < 820 and y < 690 and y > 585 then
-            print("coucou")
             pause_button = true
             life = -1
         end

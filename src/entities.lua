@@ -1,7 +1,6 @@
 
 function entities_load()
     ghost = Entity(10, 10, newImage("sprites/ghost.png"))
-    print(ghost.x)
 end
 
 function read_map()
@@ -61,15 +60,8 @@ function erase_sprite()
 end
 
 function update_map()
-    print(map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1])
     if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "fire" or  map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "spk3" then
         life = life - 1
-    end
-    if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "door" then
-
-        erase_sprite()
-        map_nb = map_nb + 1
-        read_map()
     end
     if player_pose[map_nb][2] == 1 and player_pose[map_nb][1] == 1 then 
         life = 3

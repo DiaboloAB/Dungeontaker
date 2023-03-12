@@ -69,34 +69,51 @@ function player_draw()
 end
 
 function move_player( key )
+    local ret = 0
     local dir = {}
     dir.x = 0
     dir.y = 0
     if key == "up" then
         dir.x = -1
+        ret = 1
     end
     if key == "right" then
         dir.y = 1
+        ret = 1
     end
     if key == "down" then
+        ret = 1
         dir.x = 1
     end
     if key == "left" then
+        ret = 1
         dir.y = -1
     end
 
+    for i = 1, nb_monsters[map_nb] do
+        if (monster[i].killed == false and player_pose[map_nb][1] + dir.y == monster[i].pos[1] and player_pose[map_nb][2] + dir.x == monster[i].pos[2]) then
+            monster[i].killed = true
+            dir = {}
+            goto this_one
+        end
+    end
+    if map_list[map_nb][player_pose[map_nb][2] + 1 + dir.x][player_pose[map_nb][1] + 1 + dir.y] == "door" then
+        if check_monster_killed() == false then
+            erase_sprite()
+            map_nb = map_nb + 1
+            monster = get_monster(map_nb)
+            read_map()
+            goto this_one
+        end
+        dir = {} 
+    end
     if map_list[map_nb][player_pose[map_nb][2] + 1 + dir.x][player_pose[map_nb][1] + 1 + dir.y] ~= "wall" then
         player_pose[map_nb][1] = player_pose[map_nb][1] + dir.y
         player_pose[map_nb][2] = player_pose[map_nb][2] + dir.x
         update_map()
-        timer = 10
     end
-end
-
-
-function move_player_in_tab( direction )
-    
-    return true
+    ::this_one::
+    return ret
 end
 
 function newAnimation(image, width, height, duration)

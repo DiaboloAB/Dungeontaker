@@ -1,6 +1,14 @@
 require "src.move_slime"
 
-nb_monsters = {0, 1, 0, 0, 0, 0, 0}
+function check_monster_killed()
+    local ret = false
+    for i = 1, nb_monsters[map_nb] do
+        if (monster[i].killed == false) then
+            ret = true
+        end
+    end
+    return ret
+end
 
 function get_quad(image, width, height, duration)
     local quads = {};
@@ -16,6 +24,7 @@ end
 function init_monster(id, x, y)
     local img = love.graphics.newImage(string.format("sprites/%s.png", id))
     monster = {}
+    monster.killed = false
     monster.id = "slime"
     monster.pos = {x, y}
     monster.anim = newAnimation(love.graphics.newImage(string.format("sprites/%s.png", id)), 8, 8, 6)
@@ -42,15 +51,13 @@ function get_monster(map_id)
 end
 
 function monsters_load()
-    monster = get_monster(2)
-    for i = 1, nb_monsters[map_nb] do
-        print(monster[i].id)
-    end
+    nb_monsters = {0, 1, 0, 0, 0, 0, 0}
+    monster = get_monster(map_nb)
 end
 
 function monsters_move()
     for i = 1, nb_monsters[map_nb] do
-        if (monster[i].id == "slime") then
+        if (monster[i].id == "slime" and monster[i].killed == false) then
             move_slime(monster[i])
         end
     end
@@ -67,14 +74,14 @@ end
 
 function monsters_draw()
     for i = 1, nb_monsters[map_nb] do
-        local spriteNum = math.floor(monster[i].anim.currentTime / monster[i].anim.duration * 2) + 1
-        print(tostring(spriteNum))
-        if spriteNum % 2 == 1 then
-            love.graphics.draw(monster[i].anim.spriteSheet, monster[i].quad1, monster[i].pos[1] * 64, monster[i].pos[2] * 64, 0, 8)
+        if monster[i].killed == false then
+            local spriteNum = math.floor(monster[i].anim.currentTime / monster[i].anim.duration * 2) + 1
+            if spriteNum % 2 == 1 then
+                love.graphics.draw(monster[i].anim.spriteSheet, monster[i].quad1, monster[i].pos[1] * 64, monster[i].pos[2] * 64, 0, 8)
+            end
+            if spriteNum % 2 == 0 then
+                love.graphics.draw(monster[i].anim.spriteSheet, monster[i].quad2, monster[i].pos[1] * 64, monster[i].pos[2] * 64, 0, 8)
+            end
         end
-        if spriteNum % 2 == 0 then
-            love.graphics.draw(monster[i].anim.spriteSheet, monster[i].quad2, monster[i].pos[1] * 64, monster[i].pos[2] * 64, 0, 8)
-        end
-
     end
 end
