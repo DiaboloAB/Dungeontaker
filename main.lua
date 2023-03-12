@@ -72,7 +72,7 @@ function love.mousepressed(x, y, button, istouch, key)
 end
 
 function love.keypressed( key )
-    if pause_button == true then
+    if in_start_menu == false then
         if over == false and pause_button == true then
             move_player( key )
         end
