@@ -1,6 +1,14 @@
 local love = require 'love'
 function player_load()
 
+    spike_tab = {}
+    table.insert(spike_tab, love.graphics.newImage("sprites/spike1.png"))
+    table.insert(spike_tab, love.graphics.newImage("sprites/spike2.png"))
+    table.insert(spike_tab, love.graphics.newImage("sprites/spike3.png"))
+
+    spike_pose = {}
+    spike_state = 1;
+
     timer_speedrun = 0.0000
     timer = 10
     life = 3
@@ -50,6 +58,9 @@ function player_draw()
     for i = 2, #sprites do
         local spriteNum = math.floor(sprites[i].currentTime / sprites[i].duration * #sprites[i].quads) + 1
         love.graphics.draw(sprites[i].spriteSheet, sprites[i].quads[spriteNum], sprites_pose[i - 1][1] * 64, sprites_pose[i - 1][2] * 64, 0, 8)
+    end
+    for i = 1, #spike_pose do
+        love.graphics.draw(spike_tab[spike_state], spike_pose[i][1] * 64, spike_pose[i][2] * 64, 0, 8)
     end
 
     local spriteNum = math.floor(sprites[1].currentTime / sprites[1].duration * #sprites[1].quads) + 1
@@ -132,21 +143,3 @@ function newAnimation(image, width, height, duration)
 
     return sprites
 end
-
--- function spikes_gestion()
---     for y = 1, #map_list[map_nb] do
---         for x = 1, #map_list[map_nb][y] do
---             if map_list[map_nb][y][x] == "spk2" then
---                 map_list[map_nb][y][x] = "spk0"
---                 goto continue
---             end
---             if map_list[map_nb][y][x] == "spk1" then
---                 map_list[map_nb][y][x] = "spk2"
---             end
---             if map_list[map_nb][y][x] == "spk0" then
---                 map_list[map_nb][y][x] = "spk1"
---             end
---             ::continue::
---         end
---     end
--- end

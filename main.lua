@@ -40,7 +40,7 @@ function love.draw()
         player_draw()
         monsters_draw()
     end
-    if life < 0 then
+    if life < 1 then
         game_over_draw()
         if love.keyboard.isDown("space") then
             over = false

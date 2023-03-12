@@ -10,6 +10,9 @@ function read_map()
                 table.insert(sprites_pose, {x - 1, y - 1})
                 table.insert(sprites, newAnimation(love.graphics.newImage("sprites/fire.png"), 8, 8, 6))
             end
+            if map_list[map_nb][y][x] == "spk0" then
+                table.insert(spike_pose, {x - 1, y - 1})
+            end
         end
     end
 end
@@ -29,6 +32,8 @@ function reset()
         {15, 14}
     }
 
+    spike_state = 1
+
     timer_speedrun = 0.0000
     timer = 10
     map_nb = 1
@@ -45,6 +50,7 @@ end
 function erase_sprite()
     local sprites_len = #sprites
     local pose_len = #sprites
+    local cactus_len = #spike_pose
     local i = 2
 
     while i < sprites_len + 1 do
@@ -56,14 +62,35 @@ function erase_sprite()
         table.remove(sprites_pose)
         i = i + 1
     end
+    i = 1
+    while i < cactus_len + 1 do
+        table.remove(spike_pose)
+        i = i + 1
+    end
 
 end
 
 function update_map()
-    if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "fire" or  map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "spk3" then
+
+    if spike_state == 3 then
+        spike_state = 1
+    else
+        spike_state = spike_state + 1
+    end
+    if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "fire" then
         life = life - 1
+    end
+    if spike_state == 3 then
+        for i = 1, #spike_pose do
+            if player_pose[map_nb][1] == spike_pose[i][1] then
+                if player_pose[map_nb][2] == spike_pose[i][2] then
+                    life = life - 1
+                end
+            end
+        end
     end
     if player_pose[map_nb][2] == 1 and player_pose[map_nb][1] == 1 then 
         life = 3
     end
+
 end

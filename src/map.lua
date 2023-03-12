@@ -17,7 +17,7 @@ function double(one_tab)
             if (one_tab[x] == 0) then
                 grid[i][j - 1] = "...."
             end
-            if (one_tab[x] == 90) then
+            if (one_tab[x] == 20) then
                 grid[i][j - 1] = "spk0"
             end
             x = x + 1
