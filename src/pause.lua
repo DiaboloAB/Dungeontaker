@@ -66,7 +66,7 @@ end
 
 function pause_menu_true( key )
 
-    if key == "escape" then
+    if key == "escape" and game_over == false then
             pause_button = false
     end
 end
