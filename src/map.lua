@@ -39,6 +39,8 @@ function map_load()
     map_6_png = love.graphics.newImage("maps/map_6.png")
     map_7_png = love.graphics.newImage("maps/map_7.png")
     map_8_png = love.graphics.newImage("maps/map_8.png")
+    map_9_png = love.graphics.newImage("maps/map_9.png")
+    map_10_png = love.graphics.newImage("maps/map_10.png")
 
     table.insert( map_png, map_1_png )
     table.insert( map_png, map_2_png )
@@ -48,6 +50,8 @@ function map_load()
     table.insert( map_png, map_6_png )
     table.insert( map_png, map_7_png )
     table.insert( map_png, map_8_png )
+    table.insert( map_png, map_9_png )
+    table.insert( map_png, map_10_png )
 
     map_list = {}
 
@@ -59,6 +63,8 @@ function map_load()
     table.insert( map_list, double(require('luamap.map_6') .layers[2].data))
     table.insert( map_list, double(require('luamap.map_7') .layers[2].data))
     table.insert( map_list, double(require('luamap.map_8') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_9') .layers[2].data))
+    table.insert( map_list, double(require('luamap.map_10') .layers[2].data))
 
 end
 
