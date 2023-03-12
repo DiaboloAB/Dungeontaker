@@ -6,9 +6,8 @@ end
 
 function game_over_draw()
     local x, y = love.mouse.getPosition()
-    love.graphics.scale(2)
 
-    love.graphics.draw(game_over, 665 / 2, 256 / 2, 0, 0.6, 0.6)
+    love.graphics.draw(game_over, 0, 0, 0, 1, 1)
 end
 
 function return_menu(key)
