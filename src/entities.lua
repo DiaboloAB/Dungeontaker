@@ -66,6 +66,7 @@ function update_map()
         life = life - 1
     end
     if map_list[map_nb][player_pose[map_nb][2] + 1][player_pose[map_nb][1] + 1] == "door" then
+
         erase_sprite()
         map_nb = map_nb + 1
         read_map()

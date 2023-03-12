@@ -24,6 +24,7 @@ end
 
 
 function love.update()
+    print(tostring(map_nb))
     if in_start_menu == true then
         menu_update()
     elseif over == false and pause_button == true then
@@ -74,6 +75,7 @@ function love.keypressed( key )
     if in_start_menu == false then
         if over == false and pause_button == true then
             move_player( key )
+            monsters_move()
         end
         if pause_button == true then
             pause_menu_true( key )
