@@ -47,6 +47,7 @@ function love.draw()
     if life < 0 then
         game_over_draw()
         if love.keyboard.isDown("space") then
+            over = false
             reset()
         end
     end

@@ -12,6 +12,5 @@ end
 
 function return_menu(key)
     if key == "escape" then
-        over = false
     end
 end
