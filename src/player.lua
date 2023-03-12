@@ -1,11 +1,12 @@
 local love = require 'love'
 function player_load()
-
+    reverse = 1
     spike_tab = {}
     table.insert(spike_tab, love.graphics.newImage("sprites/spike1.png"))
     table.insert(spike_tab, love.graphics.newImage("sprites/spike2.png"))
     table.insert(spike_tab, love.graphics.newImage("sprites/spike3.png"))
 
+    side = false
     spike_pose = {}
     spike_state = 1;
 
@@ -31,7 +32,7 @@ function player_load()
     }
 
     sprites = {}
-    player = newAnimation(love.graphics.newImage("sprites/player.png"), 8, 8, 6)
+    player = newAnimation(love.graphics.newImage("sprites/player_sword.png"), 8, 8, 6)
     table.insert(sprites, player)
     read_map()
 
@@ -64,7 +65,12 @@ function player_draw()
     end
 
     local spriteNum = math.floor(sprites[1].currentTime / sprites[1].duration * #sprites[1].quads) + 1
-    love.graphics.draw(sprites[1].spriteSheet, sprites[1].quads[spriteNum], player_pose[map_nb][1] * 64, player_pose[map_nb][2] * 64, 0, 8)
+    if (side == false) then
+        love.graphics.draw(sprites[1].spriteSheet, sprites[1].quads[spriteNum], player_pose[map_nb][1] * 64, player_pose[map_nb][2] * 64, 0, 8)
+    end
+    if (side == true) then
+        love.graphics.draw(love.graphics.newImage("sprites/player_sword_flip.png"), sprites[1].quads[spriteNum], player_pose[map_nb][1] * 64, player_pose[map_nb][2] * 64, 0, 8)
+    end
     love.graphics.setColor(0,255,0)
     if timer < 5 then
         love.graphics.setColor(255,140,0)
@@ -85,26 +91,26 @@ function move_player( key )
     dir.x = 0
     dir.y = 0
     if key == "up" then
-        dir.x = -1
+        dir.x = -1 * reverse
         ret = 1
     end
     if key == "right" then
-        dir.y = 1
+        dir.y = 1 * reverse
+        side = false
         ret = 1
     end
     if key == "down" then
         ret = 1
-        dir.x = 1
+        dir.x = 1 * reverse
     end
     if key == "left" then
         ret = 1
-        dir.y = -1
+        side = true
+        dir.y = -1 * reverse
     end
-
     for i = 1, nb_monsters[map_nb] do
         if (monster[i].killed == false and player_pose[map_nb][1] + dir.y == monster[i].pos[1] and player_pose[map_nb][2] + dir.x == monster[i].pos[2]) then
             monster[i].killed = true
-            dir = {}
             goto this_one
         end
     end
@@ -114,9 +120,9 @@ function move_player( key )
             map_nb = map_nb + 1
             monster = get_monster(map_nb)
             read_map()
-            goto this_one
+            reverse = 1
         end
-        dir = {} 
+        goto this_one
     end
     if map_list[map_nb][player_pose[map_nb][2] + 1 + dir.x][player_pose[map_nb][1] + 1 + dir.y] ~= "wall" then
         player_pose[map_nb][1] = player_pose[map_nb][1] + dir.y

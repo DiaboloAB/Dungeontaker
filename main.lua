@@ -7,6 +7,7 @@ require "src/entities"
 require "src/game_over"
 require "src/pause"
 require "src/monsters"
+require "src/pot"
 
 function love.load()
     love.graphics.setDefaultFilter( "nearest" )
@@ -20,6 +21,7 @@ function love.load()
     monsters_load()
     pause_load()
     game_over_load()
+    pot_load()
 end
 
 
@@ -39,6 +41,7 @@ function love.draw()
         map_draw()
         player_draw()
         monsters_draw()
+        pot_draw()
     end
     if life < 1 then
         game_over_draw()

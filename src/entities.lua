@@ -38,6 +38,7 @@ function reset()
     timer = 10
     map_nb = 1
     life = 3
+    reverse = 1
     erase_sprite()
     read_map()
 
@@ -91,6 +92,7 @@ function update_map()
     end
     if player_pose[map_nb][2] == 1 and player_pose[map_nb][1] == 1 then 
         life = 3
+        reverse = 1
     end
 
 end

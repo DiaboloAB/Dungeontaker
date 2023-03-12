@@ -3,7 +3,7 @@ require "src.move_slime"
 function check_monster_killed()
     local ret = false
     for i = 1, nb_monsters[map_nb] do
-        if (monster[i].killed == false) then
+        if (monster[i].killed == false and monster[i].id ~= "fantom") then
             ret = true
         end
     end
@@ -21,11 +21,12 @@ function get_quad(image, width, height, duration)
     return quads
 end
 
-function init_monster(id, x, y)
+function init_monster(count, id, x, y)
     local img = love.graphics.newImage(string.format("sprites/%s.png", id))
-    monster = {}
+    local monster = {}
+    monster.count = count
     monster.killed = false
-    monster.id = "slime"
+    monster.id = id
     monster.pos = {x, y}
     monster.anim = newAnimation(love.graphics.newImage(string.format("sprites/%s.png", id)), 8, 8, 6)
     monster.quad1 = love.graphics.newQuad(0, 0, 8, 8, img:getDimensions())
@@ -37,28 +38,43 @@ function get_monster(map_id)
     local monster_temp = {}
 
     if map_id == 2 then
-        monster_temp = {init_monster("slime", 16, 7)}
+        monster_temp = {init_monster(1,"zombie", 17, 8)}
     end
-    -- if (map_id == 3) then
-    --     return {{"pot", 1, 1},
-    --             {"slime", 1, 2}}
-    -- end
-    -- if (map_id == 4) then
-    --     return {{"pot", 1, 1},
-    --             {"slime", 1, 2}}
-    -- end
+    if map_id == 3 then
+        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20)),
+        init_monster(1,"slime", 14, 10)}
+    end
+    if map_id == 4 then
+        monster_temp = {init_monster(1,"zombie", 16, 7)}
+    end
+    if map_id == 5 then
+        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20))}
+    end
+    if map_id == 6 then
+        monster_temp = {init_monster(1,"zombie", 16, 7)}
+    end
+    if map_id == 7 then
+        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20))}
+    end
+
     return monster_temp
 end
 
 function monsters_load()
-    nb_monsters = {0, 1, 0, 0, 0, 0, 0}
+    nb_monsters = {0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1}
     monster = get_monster(map_nb)
 end
 
 function monsters_move()
     for i = 1, nb_monsters[map_nb] do
+        if (monster[i].id == "zombie" and monster[i].killed == false) then
+            move_zombie(monster[i], map_list[map_nb])
+        end
+        if (monster[i].id == "fantom" and monster[i].killed == false) then
+            move_fantom(monster[i], map_list[map_nb])
+        end
         if (monster[i].id == "slime" and monster[i].killed == false) then
-            move_slime(monster[i])
+            move_slime(monster[i], map_list[map_nb])
         end
     end
 end
