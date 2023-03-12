@@ -19,8 +19,7 @@ function love.load()
     menu_load()
     map_load()
     player_load()
-    ghost_load()
-    slime_load()
+
     pause_load()
     game_over_load()
 end
@@ -31,8 +30,7 @@ function love.update()
         menu_update()
     elseif over == false and pause_button == true then
         player_update()
-        ghost_update()
-        slime_update()
+
     end
 end
 
@@ -42,8 +40,6 @@ function love.draw()
     else
         map_draw()
         player_draw()
-        ghost_draw()
-        slime_draw()
     end
     if life < 0 then
         game_over_draw()
@@ -77,6 +73,8 @@ end
 
 function love.keypressed( key )
     if in_start_menu == false then
+        move_player( key )
+    if pause_button == true then
         if over == false and pause_button == true then
             move_player( key )
             move_ghost( key )
