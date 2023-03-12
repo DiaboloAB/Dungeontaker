@@ -68,4 +68,7 @@ function update_map()
         map_nb = map_nb + 1
         read_map()
     end
+    if player_pose[map_nb][2] == 1 and player_pose[map_nb][1] == 1 then 
+        life = life + 1
+    end
 end
