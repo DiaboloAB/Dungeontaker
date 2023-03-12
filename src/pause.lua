@@ -20,11 +20,18 @@ function pause_draw ()
     love.graphics.draw(resume, 855, 595, 0, 0.6, 0.6)
     love.graphics.draw(pause, 825, 350 , 0, 1, 1)
     love.graphics.draw(quit_pause, 1075, 605, 0, 0.6, 0.6)
-    love.graphics.draw(music, 915, 485, 0, 0.15, 0.15)
-    love.graphics.draw(cursor, x, y, 0, 0.3, 0.3)
-    if music_button == false then
-        love.graphics.draw(music_mute, 875, 605, 0, 0.6, 0.6)
+
+    if music_button == true then
+        love.graphics.draw(music, 915, 485, 0, 0.15, 0.15)
+        goto ici
     end
+
+    if music_button == false then
+        love.graphics.draw(music_mute, 905, 465, 0, 0.2, 0.2)
+    end
+
+    ::ici::
+    love.graphics.draw(cursor, x, y, 0, 0.3, 0.3)
 
 end
 
@@ -38,14 +45,12 @@ function pause_menu (x, y, button)
     local width_music_mute= music_mute:getWidth()
     local height_music_mute = music_mute:getHeight()
 
-    local width_kill = kill:getWidth()
-    local height_kill = kill:getHeight()
-
     local width_resume = resume:getWidth()
     local height_resume = resume:getHeight()
 
 
     if button == 1 then
+
 
         if x > 705 and x < 820 and y < 690 and y > 585 then
             print("coucou")
@@ -57,9 +62,17 @@ function pause_menu (x, y, button)
         end
 
         if width_quit_pause + 1075 > x  and x > 1075 and  height_quit_pause +  550 > y  and y > 605 then
-        love.window.close()
-        os.exit()
+            love.window.close()
+            os.exit()
         end
+        if width_music + 915 > x and x > 915 and height_music + 485 > y and y > 485 and music_button == true then
+            music_button = false
+            goto la
+        end
+        if 995 > x and x > 915 and 558 > y and y > 465 then
+            music_button = true
+        end
+    ::la::
 
     end
 end
