@@ -1,6 +1,8 @@
 local love = require 'love'
 function player_load()
 
+    timer_speedrun = 0.0000
+    timer = 10
     life = 3
     pot = love.graphics.newImage("sprites/heart.png")
 
@@ -28,6 +30,14 @@ function player_load()
 end
 
 function player_update()
+    timer_speedrun = timer_speedrun + love.timer.getDelta( )
+    if timer > 0 then
+        timer = timer - dt * 0.15
+    end
+    if (timer < 0) then
+        life = life - 1
+        timer = 10
+    end
     for i = 1, #sprites do
         sprites[i].currentTime = sprites[i].currentTime + dt
         if sprites[i].currentTime >= sprites[i].duration then
@@ -44,9 +54,18 @@ function player_draw()
 
     local spriteNum = math.floor(sprites[1].currentTime / sprites[1].duration * #sprites[1].quads) + 1
     love.graphics.draw(sprites[1].spriteSheet, sprites[1].quads[spriteNum], player_pose[map_nb][1] * 64, player_pose[map_nb][2] * 64, 0, 8)
-
+    love.graphics.setColor(0,255,0)
+    if timer < 5 then
+        love.graphics.setColor(255,140,0)
+    end
+    if timer < 2.5 then
+        love.graphics.setColor(255,0,0)
+    end
+    love.graphics.rectangle("fill", 14.5 * 64 + 30 -  timer * 64 / 2, 1 * 64, timer * 64, 24)
+    love.graphics.setColor(255,255,255)
     love.graphics.draw(pot, 1 * 64, 1 * 64, 0, 8)
     love.graphics.print(life, 2 * 64 + 30, 1 * 64, 0, 4, 4)
+    love.graphics.print(string.sub(tostring(timer_speedrun), 1, 4), 1 * 64 + 30, 2 * 64, 0, 3, 4)
 end
 
 function move_player( key )

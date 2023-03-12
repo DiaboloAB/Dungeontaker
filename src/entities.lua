@@ -30,6 +30,7 @@ function reset()
         {15, 14}
     }
 
+    timer_speedrun = 0.0000
     map_nb = 1
     life = 3
     erase_sprite()
