@@ -30,6 +30,12 @@ function get_pot(map_id)
     if map_id == 7 then
         monster_temp = {init_pot(16, 7)}
     end
+    if map_id == 8 then
+        monster_temp = {init_pot(16, 7)}
+    end
+    if map_id == 9 then
+        monster_temp = {init_pot(16, 7)}
+    end
 
     return monster_temp
 end

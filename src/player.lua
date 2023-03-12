@@ -1,5 +1,7 @@
 local love = require 'love'
 function player_load()
+    math.randomseed(os.time())
+    lvl = 1
     reverse = 1
     spike_tab = {}
     table.insert(spike_tab, love.graphics.newImage("sprites/spike1.png"))
@@ -14,6 +16,8 @@ function player_load()
     timer = 10
     life = 3
     pot = love.graphics.newImage("sprites/heart.png")
+    ruby = love.graphics.newImage("sprites/ruby.png")
+    ruby_count = 0
 
     player_pose = {
         {13, 9},
@@ -81,8 +85,10 @@ function player_draw()
     love.graphics.rectangle("fill", 14.5 * 64 + 30 -  timer * 64 / 2, 1 * 64, timer * 64, 24)
     love.graphics.setColor(255,255,255)
     love.graphics.draw(pot, 1 * 64, 1 * 64, 0, 8)
+    love.graphics.draw(ruby, 1 * 64, 2 * 64, 0, 8)
     love.graphics.print(life, 2 * 64 + 30, 1 * 64, 0, 4, 4)
-    love.graphics.print(string.sub(tostring(timer_speedrun), 1, 4), 1 * 64 + 30, 2 * 64, 0, 3, 4)
+    love.graphics.print(ruby_count, 2 * 64 + 30, 2 * 64, 0, 4, 4)
+    love.graphics.print(string.sub(tostring(timer_speedrun), 1, 4), 1 * 64 + 30, 3 * 64, 0, 3, 4)
 end
 
 function move_player( key )
@@ -116,6 +122,9 @@ function move_player( key )
     end
     for i = 1, nb_pot[map_nb] do
         if (pot_list[i].killed == false and player_pose[map_nb][1] + dir.y == pot_list[i].pos[1] and player_pose[map_nb][2] + dir.x == pot_list[i].pos[2]) then
+            if math.random(1, 3) == 1 then
+                ruby_count = ruby_count + 1
+            end
             pot_list[i].killed = true
             goto this_one
         end
@@ -123,8 +132,67 @@ function move_player( key )
     if map_list[map_nb][player_pose[map_nb][2] + 1 + dir.x][player_pose[map_nb][1] + 1 + dir.y] == "door" then
         if check_monster_killed() == false then
             erase_sprite()
-            map_nb = map_nb + 1
+            lvl = lvl + 1
+            if map_nb == 9 then
+                map_nb = 10
+            elseif lvl > 15 then
+                map_nb = 9
+            else
+                map_nb = math.random(2, 8)
+            end
+            pose_save = {
+                {13, 9},
+                {10, 7},
+                {7, 10},
+                {7, 7},
+                {5, 11},
+                {0, 8},
+                {14, 14},
+                {7, 7},
+                {1, 8},
+                {15, 14}
+            }
+            for i = 1, #player_pose do
+                player_pose[i][1] = pose_save[i][1]
+                player_pose[i][2] = pose_save[i][2]
+            end
             monster = get_monster(map_nb)
+            pot_list = get_pot(map_nb)
+            read_map()
+            reverse = 1
+        end
+        goto this_one
+    end
+    if map_list[map_nb][player_pose[map_nb][2] + 1 + dir.x][player_pose[map_nb][1] + 1 + dir.y] == "shor" then
+        if check_monster_killed() == false then
+            erase_sprite()
+            lvl = lvl + 2
+            ruby_count = ruby_count + 1
+            if map_nb == 9 then
+                map_nb = 10
+            elseif lvl > 15 then
+                map_nb = 9
+            else
+                map_nb = math.random(2, 8)
+            end
+            pose_save = {
+                {13, 9},
+                {10, 7},
+                {7, 10},
+                {7, 7},
+                {5, 11},
+                {0, 8},
+                {14, 14},
+                {7, 7},
+                {1, 8},
+                {15, 14}
+            }
+            for i = 1, #player_pose do
+                player_pose[i][1] = pose_save[i][1]
+                player_pose[i][2] = pose_save[i][2]
+            end
+            monster = get_monster(map_nb)
+            pot_list = get_pot(map_nb)
             read_map()
             reverse = 1
         end
