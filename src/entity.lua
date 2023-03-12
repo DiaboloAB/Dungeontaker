@@ -42,7 +42,7 @@ function Entity:update(dt)
 end
 
 function Entity:render()
-    love.graphics.draw(self.img, self.x * 64, self.y * 64, self.rotation)
+    love.graphics.draw(self.img, self.x * 64, self.y * 64, self.rotation, 4, 4)
 end
 
 function Entity:Move(key)
@@ -59,6 +59,38 @@ function Entity:Move(key)
     if key == "down" then
         self.y = self.y + self.speed
     end
+end
+
+function getdirection(px, py, ex, ey)
+    if (math.random(0, 15767) % 2) == 0 and py ~= ey then
+        if px - ex < 0 then
+            return "--left"
+        else
+            return "--right"
+        end
+    else
+        if py - ey < 0 then
+            return "--up"
+        else
+            return "--down"
+        end
+    end
+end
+
+function Entity:getarround(px, py)
+    if self.x + 1 == px and self.y == py then
+        return "right"
+    end
+    if self.x - 1 == px and self.y == py then
+        return "left"
+    end
+    if self.y + 1 == py and self.x == px then
+        return "down"
+    end
+    if self.y - 1 == py  and self.x == px then
+        return "up"
+    end
+    return getdirection(px, px, self.x, self.y)
 end
 
 return Entity
