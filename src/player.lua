@@ -155,7 +155,7 @@ function move_player( key )
             lvl = lvl + 1
             if map_nb == 9 then
                 map_nb = 10
-            elseif lvl > 7 then
+            elseif lvl > 19 then
                 map_nb = 9
             else
                 map_nb = math.random(2, 8)
@@ -192,7 +192,7 @@ function move_player( key )
             love.audio.play(effect[3])
             if map_nb == 9 then
                 map_nb = 10
-            elseif lvl > 7 then
+            elseif lvl > 19 then
                 map_nb = 9
             else
                 map_nb = math.random(2, 8)

@@ -25,7 +25,7 @@ function get_pot(map_id)
         monster_temp = {init_pot(16, 7)}
     end
     if map_id == 6 then
-        monster_temp = {init_pot(16, 7)}
+        monster_temp = {init_pot(16, 7),init_pot(14, 7), init_pot(13, 7)}
     end
     if map_id == 7 then
         monster_temp = {init_pot(16, 7)}
@@ -43,7 +43,7 @@ function get_pot(map_id)
 end
 
 function pot_load()
-    nb_pot = {1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0}
+    nb_pot = {1, 1, 1, 1, 1, 3, 1, 1, 1, 2, 0}
     pot_list = get_pot(map_nb)
 end
 
