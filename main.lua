@@ -9,6 +9,7 @@ require "src/game_over"
 require "src/ghost"
 require "src/slime"
 require "src/pause"
+require "src/monsters"
 
 function love.load()
     love.graphics.setDefaultFilter( "nearest" )
@@ -19,7 +20,7 @@ function love.load()
     menu_load()
     map_load()
     player_load()
-
+    monsters_load()
     pause_load()
     game_over_load()
 end
@@ -30,7 +31,7 @@ function love.update()
         menu_update()
     elseif over == false and pause_button == true then
         player_update()
-
+        monsters_update()
     end
 end
 
@@ -40,6 +41,7 @@ function love.draw()
     else
         map_draw()
         player_draw()
+        monsters_draw()
     end
     if life < 0 then
         game_over_draw()
