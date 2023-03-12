@@ -9,6 +9,7 @@ require "src/ghost"
 require "src/pause"
 
 function love.load()
+    over = 1
     love.graphics.setDefaultFilter( "nearest" )
     in_start_menu = true;
     in_game_over = true;
@@ -44,7 +45,7 @@ function love.draw()
             reset()
         end
     end
-    if (pause_button == false and life > 0) then
+    if (pause_button == false and over == 1) then
         pause_draw()
     end
 end

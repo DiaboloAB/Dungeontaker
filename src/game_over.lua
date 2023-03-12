@@ -6,12 +6,12 @@ end
 
 function game_over_draw()
     local x, y = love.mouse.getPosition()
-
+    over = true
     love.graphics.draw(game_over, 0, 0, 0, 1, 1)
 end
 
 function return_menu(key)
     if key == "escape" then
-        game_over = false
+        over = false
     end
 end
