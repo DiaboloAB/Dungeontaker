@@ -6,12 +6,20 @@ function menu_load()
     sign = love.graphics.newImage("asset_menu/wood_sign.png")
     bg_menu = love.graphics.newImage("asset_menu/bg_menu1.jpg")
 
-
+    descente = -560
     animation = menu_animation(love.graphics.newImage("asset_menu/flamme_blue.png"), 75, 185, 6)
     dt = 0.1
 end
 
 
+function menu_drop()
+time = love.timer.getTime()
+
+if (time * 10 % 2 > 0.2) and descente < -79 then
+    descente = descente + 10
+end
+
+end
 
 
 function menu_update()
@@ -27,10 +35,10 @@ end
 function menu_draw()
     local x, y = love.mouse.getPosition()
     love.graphics.draw(bg_menu, 0, 0)
-    love.graphics.draw(sign, 960 - 240, -80)
     love.graphics.draw(start,  200, 700)
     love.graphics.draw(quit,  1420, 700)
-
+    menu_drop()
+    love.graphics.draw(sign, 960 - 240, descente)
     local spriteNum = math.floor(animation.currentTime / animation.duration * #animation.quads) + 1
     love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], 80, 350, 0, 1)
     love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], 1750, 350, 0, 1)
