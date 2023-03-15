@@ -72,14 +72,14 @@ function get_monster(map_id)
         monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20)), init_monster(1,"zombie", 17, 8)}
     end
     if map_id == 10 then
-        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20), init_monster(1,"zombie", 17, 8), init_monster(1,"zombie", 16, 8), init_monster(1,"zombie", 15, 8))}
+        monster_temp = {init_monster(1,"fantom", math.random(10, 20), math.random(10, 20)), init_monster(1,"zombie", 17, 8)}
     end
-
+    print(map_id)
     return monster_temp
 end
 
 function monsters_load()
-    nb_monsters = {1, 1, 2, 1, 2, 1, 3, 2, 2, 4, 2, 2}
+    nb_monsters = {1, 1, 2, 1, 2, 1, 3, 2, 2, 2}
     monster = get_monster(map_nb)
 end
 
